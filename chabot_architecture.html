@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot Architecture Diagram</title>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 95%;
+            max-width: 1200px;
+            overflow-x: auto;
+        }
+        .diagram {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            min-width: 800px;
+        }
+        .node {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100px;
+            height: 100px;
+            text-align: center;
+        }
+        .node:hover {
+            transform: scale(1.1);
+        }
+        .circle {
+            border-radius: 50%;
+        }
+        .rectangle {
+            border-radius: 10px;
+        }
+        .diamond {
+            transform: rotate(45deg);
+        }
+        .diamond > * {
+            transform: rotate(-45deg);
+        }
+        .arrow {
+            flex-grow: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #888;
+            position: relative;
+        }
+        .arrow::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid #888;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+        }
+        .bidirectional::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-right: 6px solid #888;
+            border-top: 4px solid transparent;
+            border-bottom: 4px solid transparent;
+        }
+        .details {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            display: none;
+        }
+        .tool-list {
+            margin-top: 10px;
+            padding-left: 20px;
+        }
+        .node i {
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+        .node span {
+            font-size: 12px;
+            max-width: 90px;
+            word-wrap: break-word;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Chatbot Application Architecture</h2>
+        <div class="diagram">
+            <div class="node circle" style="background-color: #ffcccc;" onclick="showDetails('customer')">
+                <i data-lucide="user"></i>
+                <span>Customer</span>
+            </div>
+            <div class="arrow"></div>
+            <div class="node rectangle" style="background-color: #ccecff;" onclick="showDetails('interface')">
+                <i data-lucide="message-square"></i>
+                <span>Chatbot Interface</span>
+            </div>
+            <div class="arrow bidirectional"></div>
+            <div class="node diamond" style="background-color: #ccffcc;" onclick="showDetails('llm')">
+                <i data-lucide="cpu"></i>
+                <span>LLM with Tools</span>
+            </div>
+            <div class="arrow bidirectional"></div>
+            <div class="node circle" style="background-color: #ffe0cc;" onclick="showDetails('database')">
+                <i data-lucide="database"></i>
+                <span>Cloud Database</span>
+            </div>
+            <div class="arrow bidirectional"></div>
+            <div class="node rectangle" style="background-color: #e6ccff;" onclick="showDetails('restaurant')">
+                <i data-lucide="utensils"></i>
+                <span>Restaurant App</span>
+            </div>
+        </div>
+        <div id="details" class="details"></div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const details = {
+            customer: "The starting point of interaction. Customers initiate conversations and place orders.",
+            interface: "Handles user inputs and displays responses. It's the bridge between the customer and the LLM, with bidirectional communication.",
+            llm: "Processes queries and uses various tools to fulfill customer requests. It performs CRUD operations on the database and communicates bidirectionally with the Chatbot Interface.",
+            database: "Stores all relevant data including customer information, orders, and menu items. It's accessed by both the LLM and the Restaurant App for CRUD operations.",
+            restaurant: "Manages orders, inventory, and payments. It's the backend system for restaurant operations, performing CRUD operations on the database. It updates the database when payments are processed, food is prepared, and orders are delivered. It also handles transaction processing and payment confirmations."
+        };
+
+        const tools = [
+            'create_or_update_customer',
+            'check_customer_exists',
+            'fetch_customer_orders',
+            'get_menu_categories',
+            'get_menu_items',
+            'add_to_cart',
+            'view_cart',
+            'update_cart_item',
+            'place_order',
+            'update_customer_address',
+            'get_order_status'
+        ];
+
+        function showDetails(node) {
+            const detailsElement = document.getElementById('details');
+            if (node === 'llm') {
+                detailsElement.innerHTML = `
+                    <h3>Details for ${node}:</h3>
+                    <p>${details[node]}</p>
+                    <h4>Available Tools:</h4>
+                    <ul class="tool-list">
+                        ${tools.map(tool => `<li>${tool}</li>`).join('')}
+                    </ul>
+                `;
+            } else {
+                detailsElement.innerHTML = `
+                    <h3>Details for ${node}:</h3>
+                    <p>${details[node]}</p>
+                `;
+            }
+            detailsElement.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

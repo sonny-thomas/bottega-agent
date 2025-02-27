@@ -1,0 +1,12 @@
+langgraph
+langchain-community
+langchain-anthropic
+tavily-python
+pandas
+langchain_core
+prettytable
+flask
+flask-cors
+twilio
+python-dotenv
+stripe

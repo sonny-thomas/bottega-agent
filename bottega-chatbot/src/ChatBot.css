@@ -1,0 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+.send-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  animation: none;
+}
+
+.send-button.disabled:hover {
+  transform: none;
+}
+
+.unicode-text {
+  font-family: 'Arial', sans-serif;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.typing-indicator {
+  margin-bottom: 15px;
+}
+
+.typing-indicator .gradient-text {
+  font-size: 1rem;
+  font-weight: 500;
+  background-image: linear-gradient(90deg, #000000, #333333, #708090, #0077be, #00ffff);
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientText 6s linear infinite;
+}
+
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.gradient-text {
+  background-image: linear-gradient(90deg, #000000, #333333, #708090, #0077be, #00ffff);
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientText 6s linear infinite;
+}
+
+.gradient-separator {
+  height: 4px;
+  background-image: linear-gradient(90deg, #000000, #333333, #708090, #0077be, #00ffff);
+  background-size: 300% 300%;
+  animation: gradientBorder 6s linear infinite;
+}
+
+.gradient-text {
+  background-image: linear-gradient(90deg, #000000, #333333, #708090, #0077be, #00ffff);
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: gradientText 6s linear infinite;
+}
+
+@keyframes gradientText {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f5f5f5;
+}
+
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.chat-message {
+  position: relative;
+  border-radius: 15px;
+  padding: 15px;
+  margin-bottom: 15px;
+  max-width: 80%;
+  overflow: visible;
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.chat-message::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background-image: linear-gradient(90deg, #000000, #333333, #708090, #0077be, #00ffff);
+  background-size: 300% 300%;
+  z-index: -1;
+  border-radius: 17px;
+  animation: gradientBorder 6s linear infinite;
+}
+
+.chat-message::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  right: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: 13px;
+  z-index: -1;
+}
+
+.user-message {
+  align-self: flex-end;
+  margin-left: auto;
+  background-color: #e6f7ff;
+}
+
+.bot-message {
+  align-self: flex-start;
+  margin-right: auto;
+  background-color: #fff;
+}
+
+.message-content {
+  overflow: visible;
+  word-wrap: break-word;
+}
+
+.markdown-content {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.markdown-content p {
+  margin-bottom: 0.5rem;
+}
+
+.markdown-content ul, .markdown-content ol {
+  margin-left: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.markdown-content code {
+  background-color: #f0f0f0;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+@keyframes gradientBorder {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.chat-input {
+  border: 2px solid transparent;
+  background-clip: padding-box;
+  border-radius: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.chat-input::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background-image: linear-gradient(90deg, #000000, #333333, #708090, #0077be, #00ffff);
+  background-size: 300% 300%;
+  z-index: -1;
+  border-radius: 10px;
+  animation: gradientBorder 6s linear infinite;
+}
+
+.chat-input:focus {
+  outline: none;
+}
+
+.send-button {
+  background-image: linear-gradient(90deg, #000000, #333333, #708090, #0077be, #00ffff);
+  background-size: 300% 300%;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: gradientBorder 6s linear infinite;
+}
+
+.send-button:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
