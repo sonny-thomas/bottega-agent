@@ -18,6 +18,9 @@ Welcome to the Restaurant AI Assistant, an intelligent chatbot designed to enhan
 - **Order Management**: Place orders, modify cart contents, and check order status.
 - **Personalization**: See your previous order, get recommendations from AI.
 
+## Demo
+
+
 
 ## Set Up
 
